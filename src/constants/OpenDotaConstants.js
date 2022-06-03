@@ -1,0 +1,1 @@
+export const OPEN_DOTA_URL = "https://api.opendota.com/api"
