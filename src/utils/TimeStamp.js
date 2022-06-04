@@ -1,15 +1,15 @@
 export const getCurrentTimeStampString = () =>{
-    const timestamp = Date.now();
+    const timestamp = new Date();
     return timestamp.toString()
 }
 
 export const getCurrentTimeStampStringAddDays = (days) =>{
-    var timestamp = Date.now();
+    var timestamp = new Date();
     timestamp.setDate(timestamp.getDate() + days);
     return timestamp.toString()
 }
 
 export const getCurrentTimeStamp = () =>{
-    const timestamp = Date.now();
+    const timestamp = new Date();
     return timestamp
 }

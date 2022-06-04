@@ -3,17 +3,30 @@ import {useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { sagaActions } from "../../sagas/actions";
 
+import FetchIssuesRelatedtoHero from "./HeroIssueFilter"
+
 import HeroCard from "./HeroCard";
-import {SortByName} from "./Sort"
+import {SortByName, SortByIssueCount, FilterBySearchText} from "./Sort"
 
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-const HeroList = () => {
+import LoadingScreen from "../../components/LoadingScreen"
+
+const HeroList = ({issues, searchText, sortType}) => {
     const dispatch = useDispatch();
     const heros = useSelector(state => state.heros.heros);
 
-    const sortedHeros = SortByName([...heros])
+    let sortedHeros = []
+
+    if (sortType==="name"){
+        sortedHeros = SortByName([...heros])
+    } else {
+        sortedHeros = SortByIssueCount([...heros], issues)
+    }
+    
+
+    const filteredHeros = FilterBySearchText(sortedHeros, searchText)
 
     const fetchHeros = () => {
         dispatch({ type: sagaActions.FETCH_HEROS })
@@ -23,15 +36,20 @@ const HeroList = () => {
         fetchHeros()
     }, [])
 
+    const GridCard = (hero) => {
+        const heroIssues = FetchIssuesRelatedtoHero(issues, hero)
+        return <HeroCard hero={hero} issues={heroIssues}/>
+    }
+
     const GridSetup = () => {
         return <Grid container 
             spacing={2} 
             columns={{ xs: 4, sm: 8, md: 12 }}
         >
             {
-                sortedHeros.map(hero => 
+                filteredHeros.map(hero => 
                     <Grid item xs={2} key={hero.id}>
-                        <HeroCard hero={hero} />
+                        {GridCard(hero)}
                     </Grid>
                 )
             }
@@ -39,8 +57,8 @@ const HeroList = () => {
     }
 
     return <Box sx={{ width: '100%' }}>
-        {heros && heros.length == 0 && <p>No Heros Found</p>}
-        {heros && heros.length != 0 && GridSetup()}
+        {heros && heros.length === 0 && issues && issues.length === 0 && <LoadingScreen />}
+        {heros && heros.length !== 0 && issues && issues.length !== 0 && GridSetup()}
     </Box>
 
 }
