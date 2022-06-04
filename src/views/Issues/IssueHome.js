@@ -5,37 +5,33 @@ import { sagaActions } from "../../sagas/actions";
 
 import { ISSUE_STATUS_OPEN, ISSUE_STATUS_CLOSED, ISSUE_STATUS_ALL } from "../../constants/GitConstants"
 
+import Container from '@mui/material/Container';
+
 import HeroList from "./Heros";
 
 const IssueHome = () => {
     const dispatch = useDispatch();
-    const issues = [{
-      "title": "PA  Crit NOt WORKIKNG PHantom Assassin"
-    }] 
-
-    // UNCOMMENT
-    // const issues = useSelector(state => state.issues.issues);
+    const issues = useSelector(state => state.issues.issues);
     
     const fetchIssues = () => {
       dispatch({ type: sagaActions.FETCH_ISSUES, issue_state: ISSUE_STATUS_OPEN })
     }
     
-    // UNCOMMENT
-    // useEffect(() => {
-    //   fetchIssues()
-    // }, [dispatch])
+    useEffect(() => {
+      fetchIssues()
+    }, [])
     
   
     return (
-      <div>
+      <Container maxWidth="m">
         {issues && issues.map(issue=>{
-            return <p>{issue.title}</p>
+            return <p key={Math.random()}>{issue.title}</p>
         })}
         {issues.length == 0 && <p>Nothing to show!</p>}
 
         <HeroList/>
 
-      </div>
+      </Container>
     )
 }
 
