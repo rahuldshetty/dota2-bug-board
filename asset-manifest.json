@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/dota2-bug-board/static/css/main.1d3776b0.css",
+    "main.js": "/dota2-bug-board/static/js/main.8ca8679f.js",
+    "static/media/minimap_hero_sheets_new.png": "/dota2-bug-board/static/media/minimap_hero_sheets_new.8b9d4a74ac5fa5490e3a.png",
+    "index.html": "/dota2-bug-board/index.html",
+    "main.1d3776b0.css.map": "/dota2-bug-board/static/css/main.1d3776b0.css.map",
+    "main.8ca8679f.js.map": "/dota2-bug-board/static/js/main.8ca8679f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1d3776b0.css",
+    "static/js/main.8ca8679f.js"
+  ]
+}
