@@ -1,3 +1,20 @@
+# dota2-bug-board
+
+[Live Demo](https://rahuldshetty.github.io/dota2-bug-board/)
+
+Issue Tracker for DOTA 2 different heroes based on Jeff Hill's Bug Tracker Repository: [https://github.com/jeffhill/Dota2](https://github.com/jeffhill/Dota2).
+
+I built this project as a hobby and to learn web development using React JS framework. Open to take any feedback/suggestion to improve this project.
+
+
+Some details about the project:
+
+1. Open Source - You can find the complete source code for this project: [https://github.com/rahuldshetty/dota2-bug-board](https://github.com/rahuldshetty/dota2-bug-board).
+2. Github API & OpenDota API to fetch Github issues & hero information.
+3. Issue grouping is implemented using keyword search.(Data will not be 100% accurate as it uses a simple search. I will try to explore other options like Fuzzy Matching/Context based Searching in the future.)
+4. Issue data is cached on the browser.(Expiry: 1 day)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

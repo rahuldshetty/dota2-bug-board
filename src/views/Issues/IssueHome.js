@@ -21,6 +21,8 @@ import IconButton from '@mui/material/IconButton';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
+import AboutProject from "./AboutProject"
+
 const IssueHome = ({mode, setMode}) => {
     const dispatch = useDispatch();
     const issues = useSelector(state => state.issues.issues);
@@ -62,7 +64,7 @@ const IssueHome = ({mode, setMode}) => {
         alignItems: "center", 
         display: "flex", 
         justifyContent: "center", 
-        marginTop: 15,
+        marginTop: 15
       }}>
         
         <IconButton style={{borderRadius: 0}} onClick={setMode} size="large">
@@ -73,10 +75,13 @@ const IssueHome = ({mode, setMode}) => {
     }
   
     return (
-      <Container maxWidth="m">
+      <Container maxWidth="m" style={{
+        marginBottom: 15
+      }}>
+        <AboutProject/>
         <Box sx={{ 
           margin: 2,
-          display: "flex"
+          display: "flex",
         }}
           >
           <TextField 

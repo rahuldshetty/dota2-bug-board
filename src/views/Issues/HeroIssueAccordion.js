@@ -9,9 +9,22 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import CssBaseline from '@mui/material/CssBaseline';
 
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+import Divider from '@mui/material/Divider';
+
 import ReactMarkdown from 'react-markdown'
 
+import Link from '@mui/material/Link';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+
+
 const AccordionCard = (issue, key) => {
+    const state_label = issue.state == "open" ? "Open":"Healed"
+    const state_color = issue.state == "open" ? "error" : "success";
+
     return (
         <ListItem key={key}  sx={{
             paddingTop: 0,
@@ -23,12 +36,47 @@ const AccordionCard = (issue, key) => {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                    <Typography variant="h6">{issue.title}</Typography>
+                    <Stack direction="row" spacing={1}>
+                        <Chip color={state_color} label={state_label} /> 
+                        <Typography style={{
+                            marginTop: 2
+                        }}>{issue.title}</Typography>
+                    </Stack>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <ReactMarkdown>
-                        {issue.body}
-                    </ReactMarkdown>
+                    <Box  sx={{
+                        p: 2,
+                        margin: 0,
+                        paddingTop: 0
+                    }} >
+                        <ReactMarkdown children={issue.body}/>
+                    </Box>
+
+                    <Divider variant="middle" />
+                    
+                    <Stack direction="row" alignItems="center" sx={{
+                        paddingTop: 2,
+                        paddingLeft: 2
+                    }} gap={2} >
+                        <Link rel="noopener noreferrer" target="_blank" href={issue.html_url} color="inherit">
+                            <Stack direction="row" alignItems="center" gap={1}>
+                                <GitHubIcon fontSize='large'/>    
+                                Link To Issue
+                            </Stack>
+                        </Link>
+
+                        <Stack direction="row" alignItems="center" gap={1}>
+                            <ThumbUpIcon fontSize='large' color="success"/>    
+                            {issue.reactions['+1'] + issue.reactions['heart'] + issue.reactions['hooray']}
+                        </Stack>
+
+                        <Stack direction="row" alignItems="center" gap={1}>
+                            <ThumbDownIcon fontSize='large' color="error"/>    
+                            {issue.reactions['-1']}
+                        </Stack>
+
+                    </Stack>
+
                 </AccordionDetails>
             </Accordion>
         </ListItem>
