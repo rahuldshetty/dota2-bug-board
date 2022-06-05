@@ -8,15 +8,27 @@ import Chip from '@mui/material/Chip';
 import BugReportIcon from '@mui/icons-material/BugReport';
 import HealingIcon from '@mui/icons-material/Healing';
 
-
+import { useDispatch } from "react-redux";
+import { setSelectedHero } from "../../store/HeroReducer"
 
 const HeroCard = ({hero, issues}) => {
+    const dispatch = useDispatch();
+
+    const setCardHero = () => {
+        dispatch(setSelectedHero(
+            {
+                ...hero,
+                issues: issues
+            }
+        ))
+    }
+
     const bugsOpen = issues.filter((issue)=>issue.state == "open").length
     const bugsClosed = issues.filter((issue)=>issue.state == "closed").length
 
     return (
         <Card sx={{ minWidth: 175 }}>
-            <CardActionArea>
+            <CardActionArea onClick={setCardHero}>
                 <CardHeader
                     avatar={
                         <i className={"d2mh " + hero.name}></i>

@@ -12,6 +12,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
 import LoadingScreen from "../../components/LoadingScreen"
+import HeroModal from "./HeroIssueModal"
 
 const HeroList = ({issues, searchText, sortType}) => {
     const dispatch = useDispatch();
@@ -24,7 +25,6 @@ const HeroList = ({issues, searchText, sortType}) => {
     } else {
         sortedHeros = SortByIssueCount([...heros], issues)
     }
-    
 
     const filteredHeros = FilterBySearchText(sortedHeros, searchText)
 
@@ -57,6 +57,7 @@ const HeroList = ({issues, searchText, sortType}) => {
     }
 
     return <Box sx={{ width: '100%' }}>
+        <HeroModal/>
         {heros && heros.length === 0 && issues && issues.length === 0 && <LoadingScreen />}
         {heros && heros.length !== 0 && issues && issues.length !== 0 && GridSetup()}
     </Box>

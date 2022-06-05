@@ -17,7 +17,11 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 
-const IssueHome = () => {
+import IconButton from '@mui/material/IconButton';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+
+const IssueHome = ({mode, setMode}) => {
     const dispatch = useDispatch();
     const issues = useSelector(state => state.issues.issues);
 
@@ -53,12 +57,25 @@ const IssueHome = () => {
       </div>
     }
 
+    const ToggleButtonIcon = () =>{
+      return <div style={{
+        alignItems: "center", 
+        display: "flex", 
+        justifyContent: "center", 
+        marginTop: 15,
+      }}>
+        
+        <IconButton style={{borderRadius: 0}} onClick={setMode} size="large">
+            {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+        </IconButton>
+
+      </div>
+    }
   
     return (
       <Container maxWidth="m">
         <Box sx={{ 
           margin: 2,
-          marginRight: '20%',
           display: "flex"
         }}
           >
@@ -74,6 +91,7 @@ const IssueHome = () => {
             }}
             />
             {generateSelectForm()}
+            {ToggleButtonIcon()}
         </Box>
         <HeroList issues={issues} searchText={searchText} sortType={sortType}/>
       </Container>
